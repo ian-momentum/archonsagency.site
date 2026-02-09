@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Archons Insurance | Futuristic Protection</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #233646;    /* Deep Slate */
+            --bg-light: #d5e3e4;  /* Soft Mist */
+            --accent: #2dabc1;    /* Electric Teal */
+            --success: #1ab394;   /* Mint Green */
+            --white: #ffffff;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: var(--bg-light); 
+            color: var(--primary); 
+            line-height: 1.6; 
+            overflow-x: hidden;
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            background: var(--primary);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 2px solid var(--accent);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--white);
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+
+        .logo-container img { height: 45px; width: auto; border-radius: 50%; }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover { color: var(--accent); }
+
+        /* --- HERO --- */
+        header {
+            background: linear-gradient(rgba(35, 54, 70, 0.9), rgba(35, 54, 70, 0.9)), 
+                        url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=2072');
+            background-size: cover;
+            color: var(--white);
+            padding: 80px 5% 120px;
+            text-align: center;
+        }
+
+        header h1 { font-size: 3rem; margin-bottom: 10px; }
+        header p { font-weight: 300; opacity: 0.9; font-size: 1.2rem; }
+
+        /* --- LAYOUT --- */
+        .wrapper {
+            max-width: 1200px;
+            margin: -60px auto 60px;
+            padding: 0 20px;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+
+        h2 { margin-bottom: 20px; color: var(--primary); border-bottom: 2px solid #eee; padding-bottom: 10px; }
+
+        /* --- TABS SYSTEM --- */
+        .tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 25px; }
+        .tab-link {
+            padding: 10px 18px;
+            background: #e0e7e8;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.8rem;
+            transition: 0.3s;
+        }
+        .tab-link.active { background: var(--accent); color: white; }
+        .tab-content { display: none; border: 1px solid #eee; padding: 20px; border-radius: 8px; background: #fafafa; }
+        .tab-content.active { display: block; }
+
+        /* --- FOOTER --- */
+        .coming-soon-box {
+            background: var(--success);
+            color: white;
+            padding: 40px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        footer { text-align: center; padding: 40px; opacity: 0.7; font-size: 0.8rem; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 { font-size: 2rem; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="logo-container">
+        <img src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJqZnduYWF6bmR6Znd6Znd6Znd6Znd6Znd6Znd6Znd6Znd6JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1z/3o7TKMGpxx8N2C6nS0/giphy.gif" alt="Archons Logo">
+        <span>ARCHONS INSURANCE</span>
+    </div>
+    <div class="nav-links">
+        <a href="#login">Login</a>
+        <a href="#service">Service</a>
+        <a href="#quotes">Quotes</a>
+    </div>
+</nav>
+
+<header>
+    <h1>Secure Human Enterprise.</h1>
+    <p>Premium Insurance Solutions for the Next Generation.</p>
+</header>
+
+<div class="wrapper">
+
+    <section class="card" id="login">
+        <h2>Insured Login</h2>
+        <div style="max-width: 450px;">
+            <script id="nc_login" src="https://www.nowcerts.com/Resources/Scripts/import.js" data-destination="Login" data-url="https://www7.nowcerts.com/Login.aspx?AgencyId=68c6710b-522e-4096-a41c-ec5d1559746f&ShowAgencyLogo=true" type="text/javascript"></script>
+        </div>
+    </section>
+
+    <section class="card" id="service">
+        <h2>Service Command Center</h2>
+        <div class="tabs">
+            <button class="tab-link active" onclick="openTab(event, 'general')">General</button>
+            <button class="tab-link" onclick="openTab(event, 'drivers')">Drivers</button>
+            <button class="tab-link" onclick="openTab(event, 'vehicles')">Vehicles</button>
+            <button class="tab-link" onclick="openTab(event, 'coi')">COI / Address</button>
+        </div>
+
+        <div id="general" class="tab-content active">
+            <h3>General Service Request</h3>
+            <script id="nc_gen" src="https://www.nowcerts.com/Resources/Scripts/import.js?v-sr-ss" data-url="https://www7.nowcerts.com/ServiceRequests_GeneralNews/Insert.aspx?InsuranceAgencyId=68c6710b-522e-4096-a41c-ec5d1559746f&IsPopup=true" data-height="500" type="text/javascript"></script>
+        </div>
+
+        <div id="drivers" class="tab-content">
+            <h3 style="margin-bottom:10px;">Driver Management</h3>
+            <p>Add Driver:</p>
+            <script id="nc_add_dr" src="https://www.nowcerts.com/Resources/Scripts/import.js?v-sr-ss" data-url="https://www7.nowcerts.com/ServiceRequests_AddDrivers/Insert.aspx?InsuranceAgencyId=68c6710b-522e-4096-a41c-ec5d1559746f&IsPopup=true" data-height="400" type="text/javascript"></script>
+            <hr style="margin:20px 0;">
+            <p>Replace Driver:</p>
+            <script id="nc_rep_dr" src="https://www.nowcerts.com/Resources/Scripts/import.js?v-sr-ss" data-url="https://www7.nowcerts.com/ServiceRequests_ReplaceDrivers/Insert.aspx?InsuranceAgencyId=68c6710b-522e-4096-a41c-ec5d1559746f&IsPopup=true" data-height="400" type="text/javascript"></script>
+        </div>
+
+        <div id="vehicles" class="tab-content">
+            <h3>Vehicle Management</h3>
+            <script id="nc_veh" src="https://www.nowcerts.com/Resources/Scripts/import.js?v-sr-ss" data-url="https://www7.nowcerts.com/ServiceRequests_AddVehicles/Insert.aspx?InsuranceAgencyId=68c6710b-522e-4096-a41c-ec5d1559746f&IsPopup=true" data-height="500" type="text/javascript"></script>
+        </div>
+
+        <div id="coi" class="tab-content">
+            <h3>COI & Address</h3>
+            <script id="nc_coi" src="https://www.nowcerts.com/Resources/Scripts/import.js?v-sr-ss" data-url="https://www7.nowcerts.com/ServiceRequests_CertificateofInsurances/Insert.aspx?InsuranceAgencyId=68c6710b-522e-4096-a41c-ec5d1559746f&IsPopup=true" data-height="500" type="text/javascript"></script>
+        </div>
+    </section>
+
+    <section class="card" id="quotes">
+        <h2>Instant Quotes</h2>
+        <div class="tabs">
+            <button class="tab-link active" onclick="openTab(event, 'p-auto')">Personal Auto</button>
+            <button class="tab-link" onclick="openTab(event, 'c-auto')">Commercial Auto</button>
+            <button class="tab-link" onclick="openTab(event, 'home')">Homeowners</button>
+        </div>
+        <div id="p-auto" class="tab-content active">
+             <script id="nc_pauto" src="https://www.nowcerts.com/Resources/Scripts/import.js?v-qr-ss" data-url="https://www7.nowcerts.com/Pages/QuoteRequests/Auto/Personal.aspx?AgencyId=68c6710b-522e-4096-a41c-ec5d1559746f" data-height="600" type="text/javascript"></script>
+        </div>
+        <div id="c-auto" class="tab-content">
+             <script id="nc_cauto" src="https://www.nowcerts.com/Resources/Scripts/import.js?v-qr-ss" data-url="https://www7.nowcerts.com/Pages/QuoteRequests/Auto/Commercial.aspx?AgencyId=68c6710b-522e-4096-a41c-ec5d1559746f" data-height="600" type="text/javascript"></script>
+        </div>
+        <div id="home" class="tab-content">
+             <script id="nc_home" src="https://www.nowcerts.com/Resources/Scripts/import.js?v-qr-ss" data-url="https://www7.nowcerts.com/Pages/QuoteRequests/Homeowners.aspx?AgencyId=68c6710b-522e-4096-a41c-ec5d1559746f" data-height="600" type="text/javascript"></script>
+        </div>
+    </section>
+
+    <section class="card">
+        <h2>HOA Portal</h2>
+        <script id="nc_hoa" src="https://www.nowcerts.com/Resources/Scripts/import.js?ss" data-destination="Pages/HOA/Welcome" data-height="800px" data-width="100%" data-agencyid="68c6710b-522e-4096-a41c-ec5d1559746f" type="text/javascript"></script>
+    </section>
+
+    <div class="coming-soon-box">
+        <h2>Automated PDF Data Extraction</h2>
+        <p>Coming Soon: Fill out any PDF form and our backend will extract the data instantly.</p>
+    </div>
+
+</div>
+
+<footer>
+    &copy; 2026 Archons Insurance Agency | Secure Digital Portal
+</footer>
+
+<script>
+    function openTab(evt, tabName) {
+        var i, tabcontent, tablinks;
+        // Get parent section to narrow scope
+        var section = evt.currentTarget.closest('section');
+        
+        tabcontent = section.getElementsByClassName("tab-content");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = section.getElementsByClassName("tab-link");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(tabName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+</script>
+
+</body>
+</html>

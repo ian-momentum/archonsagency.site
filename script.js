@@ -17,17 +17,17 @@ window.addEventListener("mousemove", (e) => {
 });
 
 // Tab Switching Logic
-const tabs = document.querySelectorAll(".tab-btn");
-const panels = document.querySelectorAll(".tab-panel");
+const navBtns = document.querySelectorAll(".nav-btn");
+const mainPanels = document.querySelectorAll(".tab-panel");
 
-tabs.forEach(tab => {
-    tab.addEventListener("click", () => {
-        const target = tab.dataset.tab;
+navBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
+        const target = btn.dataset.tab;
 
-        tabs.forEach(t => t.classList.remove("active"));
-        panels.forEach(p => p.classList.remove("active"));
+        navBtns.forEach(b => b.classList.remove("active"));
+        mainPanels.forEach(p => p.classList.remove("active"));
 
-        tab.classList.add("active");
+        btn.classList.add("active");
         document.getElementById(target).classList.add("active");
     });
 });

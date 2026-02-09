@@ -2,42 +2,55 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Service Center | Archons Insurance</title>
+    <title>Service Center | Archons</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <nav class="glass-nav">
-        <a href="index.html" class="logo">
-            <img src="assets/crystal.gif" alt="Archons Logo" class="spinning-logo">
-            <span>ARCHONS</span>
-        </a>
-        <ul class="nav-links">
-            <li><a href="portal.html">Client Portal</a></li>
-            <li><a href="services.html">Services</a></li>
-            <li><a href="quotes.html">Quotes</a></li>
-            <li><a href="hoa.html">HOA</a></li>
-        </ul>
-    </nav>
-
     <main class="container">
-        <div class="glass-card">
-            <h2 class="widget-title">General Service Request</h2>
-            <script id="nowcerts" src="https://www.nowcerts.com/Resources/Scripts/import.js?v-sr-ss" data-url="https://www7.nowcerts.com/ServiceRequests_GeneralNews/Insert.aspx?InsuranceAgencyId=68c6710b-522e-4096-a41c-ec5d1559746f&IsPopup=true" data-height="500" type="text/javascript"></script>
-        </div>
+        <section id="general" class="glass-card">
+            <h3>General Service Request</h3>
+            <script id="nowcerts" src="https://www.nowcerts.com/Resources/Scripts/import.js?v-sr-ss" data-url="https://www7.nowcerts.com/ServiceRequests_GeneralNews/Insert.aspx?InsuranceAgencyId=68c6710b-522e-4096-a41c-ec5d1559746f&IsPopup=true" data-height="800" type="text/javascript"></script>
+        </section>
 
-        <div class="glass-card">
-            <h2 class="widget-title">Driver & Vehicle Updates</h2>
-            <div class="widget-grid">
-                <div>
-                    <h3>Add Driver</h3>
-                    <script id="nowcerts" src="https://www.nowcerts.com/Resources/Scripts/import.js?v-sr-ss" data-url="https://www7.nowcerts.com/ServiceRequests_AddDrivers/Insert.aspx?InsuranceAgencyId=68c6710b-522e-4096-a41c-ec5d1559746f&IsPopup=true" data-height="400" type="text/javascript"></script>
-                </div>
-                <div>
-                    <h3>Add Vehicle</h3>
-                    <script id="nowcerts" src="https://www.nowcerts.com/Resources/Scripts/import.js?v-sr-ss" data-url="https://www7.nowcerts.com/ServiceRequests_AddVehicles/Insert.aspx?InsuranceAgencyId=68c6710b-522e-4096-a41c-ec5d1559746f&IsPopup=true" data-height="400" type="text/javascript"></script>
-                </div>
-            </div>
-        </div>
+        <section id="add-driver" class="glass-card">
+            <h3>Add Driver</h3>
+            <script id="nowcerts" src="https://www.nowcerts.com/Resources/Scripts/import.js?v-sr-ss" data-url="https://www7.nowcerts.com/ServiceRequests_AddDrivers/Insert.aspx?InsuranceAgencyId=68c6710b-522e-4096-a41c-ec5d1559746f&IsPopup=true" data-height="800" type="text/javascript"></script>
+        </section>
+
+        <section id="replace-driver" class="glass-card">
+            <h3>Replace Driver</h3>
+            <script id="nowcerts" src="https://www.nowcerts.com/Resources/Scripts/import.js?v-sr-ss" data-url="https://www7.nowcerts.com/ServiceRequests_ReplaceDrivers/Insert.aspx?InsuranceAgencyId=68c6710b-522e-4096-a41c-ec5d1559746f&IsPopup=true" data-height="800" type="text/javascript"></script>
+        </section>
+
+        <section id="remove-driver" class="glass-card">
+            <h3>Remove Driver</h3>
+            <script id="nowcerts" src="https://www.nowcerts.com/Resources/Scripts/import.js?v-sr-ss" data-url="https://www7.nowcerts.com/ServiceRequests_RemoveDrivers/Insert.aspx?InsuranceAgencyId=68c6710b-522e-4096-a41c-ec5d1559746f&IsPopup=true" data-height="800" type="text/javascript"></script>
+        </section>
+
+        <section id="add-vehicle" class="glass-card">
+            <h3>Add Vehicle</h3>
+            <script id="nowcerts" src="https://www.nowcerts.com/Resources/Scripts/import.js?v-sr-ss" data-url="https://www7.nowcerts.com/ServiceRequests_AddVehicles/Insert.aspx?InsuranceAgencyId=68c6710b-522e-4096-a41c-ec5d1559746f&IsPopup=true" data-height="800" type="text/javascript"></script>
+        </section>
+
+        <section id="address" class="glass-card">
+            <h3>Address Change</h3>
+            <script id="nowcerts" src="https://www.nowcerts.com/Resources/Scripts/import.js?v-sr-ss" data-url="https://www7.nowcerts.com/ServiceRequests_AddressChanges/Insert.aspx?InsuranceAgencyId=68c6710b-522e-4096-a41c-ec5d1559746f&IsPopup=true" data-height="800" type="text/javascript"></script>
+        </section>
+
+        <section id="transfer" class="glass-card">
+            <h3>Vehicle Transfer</h3>
+            <script id="nowcerts" src="https://www.nowcerts.com/Resources/Scripts/import.js?v-sr-ss" data-url="https://www7.nowcerts.com/ServiceRequests_VehicleTransfers/Insert.aspx?InsuranceAgencyId=68c6710b-522e-4096-a41c-ec5d1559746f&IsPopup=true" data-height="800" type="text/javascript"></script>
+        </section>
+
+        <section id="coi" class="glass-card">
+            <h3>COI Request</h3>
+            <script id="nowcerts" src="https://www.nowcerts.com/Resources/Scripts/import.js?v-sr-ss" data-url="https://www7.nowcerts.com/ServiceRequests_CertificateofInsurances/Insert.aspx?InsuranceAgencyId=68c6710b-522e-4096-a41c-ec5d1559746f&IsPopup=true" data-height="800" type="text/javascript"></script>
+        </section>
+
+        <section id="other" class="glass-card">
+            <h3>Policy Change Request - Other</h3>
+            <script id="nowcerts" src="https://www.nowcerts.com/Resources/Scripts/import.js?v-sr-ss" data-url="https://www7.nowcerts.com/Request/Insert.aspx?Type=1&InsuranceAgencyId=68c6710b-522e-4096-a41c-ec5d1559746f&IsPopup=true" data-height="800" type="text/javascript"></script>
+        </section>
     </main>
 </body>
 </html>

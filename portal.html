@@ -2,19 +2,37 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Client Portal | Archons Insurance</title>
+    <title>Client Portal | Archons</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <nav class="glass-nav">
-        <a href="index.html" class="logo">
-            <img src="assets/crystal.gif" alt="Archons Logo" class="spinning-logo">
-            <span>ARCHONS</span>
-        </a>
+        <a href="index.html" class="logo"><img src="assets/crystal.gif" class="spinning-logo"> ARCHONS</a>
         <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
             <li><a href="portal.html">Client Portal</a></li>
-            <li><a href="services.html">Services</a></li>
-            <li><a href="quotes.html">Quotes</a></li>
+            <li class="dropdown">
+                <button class="dropbtn">Service Request ▾</button>
+                <div class="dropdown-content">
+                    <a href="services.html#general">General Request</a>
+                    <a href="services.html#add-driver">Add Driver</a>
+                    <a href="services.html#replace-driver">Replace Driver</a>
+                    <a href="services.html#remove-driver">Remove Driver</a>
+                    <a href="services.html#add-vehicle">Add Vehicle</a>
+                    <a href="services.html#address">Address Change</a>
+                    <a href="services.html#transfer">Vehicle Transfer</a>
+                    <a href="services.html#coi">COI Request</a>
+                    <a href="services.html#other">Policy Change - Other</a>
+                </div>
+            </li>
+            <li class="dropdown">
+                <button class="dropbtn">Quotes ▾</button>
+                <div class="dropdown-content">
+                    <a href="quotes.html#personal-auto">Personal Auto</a>
+                    <a href="quotes.html#commercial-auto">Commercial Auto</a>
+                    <a href="quotes.html#homeowners">Homeowners</a>
+                </div>
+            </li>
             <li><a href="hoa.html">HOA</a></li>
         </ul>
     </nav>
@@ -22,10 +40,7 @@
     <main class="container">
         <div class="glass-card">
             <h2 class="widget-title">Insured Login</h2>
-            <p style="margin-bottom: 30px;">Access your policies and certificates securely.</p>
-            <div style="max-width: 450px;">
-                <script id="nowcerts" src="https://www.nowcerts.com/Resources/Scripts/import.js" data-destination="Login" data-url="https://www7.nowcerts.com/Login.aspx?AgencyId=68c6710b-522e-4096-a41c-ec5d1559746f&ShowAgencyLogo=true" type="text/javascript"></script>
-            </div>
+            <script id="nowcerts" src="https://www.nowcerts.com/Resources/Scripts/import.js" data-destination="Login" data-url="https://www7.nowcerts.com/Login.aspx?AgencyId=68c6710b-522e-4096-a41c-ec5d1559746f&ShowAgencyLogo=true" type="text/javascript"></script>
         </div>
     </main>
 </body>

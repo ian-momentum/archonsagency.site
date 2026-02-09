@@ -1,8 +1,7 @@
 :root {
-    --primary: #233646;    /* Deep Navy */
-    --accent: #2dabc1;     /* Tech Teal */
-    --mint: #1ab394;       /* Success Green */
-    --bg: #f4f7f8;         /* Professional Light Grey */
+    --primary: #233646;
+    --accent: #2dabc1;
+    --bg: #f4f7f8;
     --white: #ffffff;
 }
 
@@ -11,76 +10,82 @@ body {
     color: var(--primary);
     font-family: 'Inter', sans-serif;
     margin: 0;
-    line-height: 1.6;
 }
 
-/* NAVIGATION */
+/* NAVIGATION & DROPDOWNS */
 .glass-nav {
     position: sticky;
     top: 0;
     background: var(--primary);
-    padding: 1rem 5%;
+    padding: 0 5%;
     display: flex;
     justify-content: space-between;
     align-items: center;
     z-index: 1000;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    height: 70px;
 }
 
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    color: var(--white);
-    font-weight: 700;
-    text-decoration: none;
+.nav-links { 
+    display: flex; 
+    list-style: none; 
+    gap: 10px; 
+    margin: 0; 
+    height: 100%;
 }
 
-.spinning-logo { width: 35px; height: auto; }
+.dropdown { position: relative; height: 100%; display: flex; align-items: center; }
 
-.nav-links { display: flex; list-style: none; gap: 25px; margin: 0; padding: 0; }
-.nav-links a { 
+.nav-links a, .dropbtn { 
     color: rgba(255,255,255,0.8); 
     text-decoration: none; 
     font-size: 0.9rem; 
     font-weight: 600;
-    transition: 0.3s;
-}
-.nav-links a:hover { color: var(--accent); }
-
-/* HERO SECTION */
-.hero {
-    padding: 80px 10%;
-    background: linear-gradient(135deg, #ffffff 0%, #d5e3e4 100%);
-    text-align: center;
-    border-bottom: 1px solid #e1e8ed;
+    padding: 0 15px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    height: 100%;
 }
 
-.hero h1 { font-size: 3rem; margin-bottom: 1rem; color: var(--primary); }
-.hero span { color: var(--accent); }
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 70px;
+    background-color: var(--white);
+    min-width: 220px;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 0 0 8px 8px;
+}
 
-/* MAIN CONTAINER */
+.dropdown-content a {
+    color: var(--primary);
+    padding: 12px 16px;
+    display: block;
+    border-bottom: 1px solid #eee;
+}
+
+.dropdown-content a:hover { background-color: #f1f1f1; color: var(--accent); }
+.dropdown:hover .dropdown-content { display: block; }
+.nav-links a:hover, .dropdown:hover .dropbtn { color: var(--accent); }
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 768px) {
+    .nav-links { display: none; } /* In a real build, you'd add a Hamburger Menu here */
+    .hero h1 { font-size: 2rem; }
+}
+
+/* WIDGET UNIFORMITY */
 .container { max-width: 1100px; margin: 40px auto; padding: 0 20px; }
-
 .glass-card {
     background: var(--white);
     border-radius: 12px;
-    padding: 40px;
+    padding: 30px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-    border: 1px solid #e1e8ed;
     margin-bottom: 30px;
 }
 
-.widget-title {
-    border-left: 4px solid var(--accent);
-    padding-left: 15px;
-    margin-bottom: 25px;
-    font-size: 1.5rem;
-    color: var(--primary);
-}
-
-.widget-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
-}
+/* Ensure all NowCerts iframes fill the container width */
+#nowcerts, iframe { width: 100% !important; min-width: 100%; }

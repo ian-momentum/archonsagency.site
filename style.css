@@ -1,0 +1,83 @@
+:root {
+    --primary: #233646;
+    --accent: #2dabc1;
+    --mint: #1ab394;
+    --glass: rgba(255, 255, 255, 0.1);
+    --glass-border: rgba(255, 255, 255, 0.2);
+}
+
+body {
+    background: radial-gradient(circle at top right, #2c4e58, #233646);
+    color: white;
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    cursor: none; /* Hide default cursor for custom one */
+}
+
+/* Glassmorphism Effect */
+.glass-card {
+    background: var(--glass);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 2rem;
+    margin: 2rem 0;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.glass-nav {
+    position: fixed;
+    width: 90%;
+    left: 5%;
+    top: 20px;
+    background: rgba(35, 54, 70, 0.7);
+    backdrop-filter: blur(10px);
+    border-radius: 50px;
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 30px;
+    z-index: 1000;
+}
+
+/* Custom Cursor */
+.cursor-dot, .cursor-outline {
+    pointer-events: none;
+    position: fixed;
+    top: 0; left: 0;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s ease-out;
+    z-index: 9999;
+}
+.cursor-dot { width: 8px; height: 8px; background-color: var(--accent); }
+.cursor-outline {
+    width: 30px; height: 30px;
+    border: 2px solid var(--accent);
+}
+
+/* Hero Animations */
+.hero {
+    height: 60vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.reveal-text {
+    font-size: 4rem;
+    font-weight: 800;
+    animation: fadeInUp 1s ease forwards;
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.spinning-logo {
+    width: 40px;
+    filter: drop-shadow(0 0 10px var(--accent));
+}

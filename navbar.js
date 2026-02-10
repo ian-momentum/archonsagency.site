@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function() {
     <nav class="glass-nav">
         <a href="index.html" class="logo">
             <img src="assets/crystal.gif" alt="Archons Logo" class="spinning-logo">
-            <span>ARCHONS</span>
+            <span>ARCHONS INSURANCE</span>
         </a>
         <ul class="nav-links">
             <li><a href="index.html">Home</a></li>
@@ -44,3 +44,9 @@ document.addEventListener("DOMContentLoaded", function() {
         navContainer.innerHTML = navHTML;
     }
 });
+
+// Mobile Menu Toggle Function
+function toggleMenu() {
+    const nav = document.getElementById("navLinks");
+    nav.classList.toggle("active");
+}

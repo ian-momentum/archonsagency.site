@@ -27,8 +27,8 @@ document.addEventListener("DOMContentLoaded", function() {
             <li class="dropdown">
                 <button class="dropbtn">Quotes ▾</button>
                 <div class="dropdown-content">
-                    <a href="quote-personal.html">Personal Auto</a>
-                    <a href="quote-commercial.html">Commercial Auto</a>
+                    <a href="quote-personal-auto.html">Personal Auto</a>
+                    <a href="quote-commercial-auto.html">Commercial Auto</a>
                     <a href="quote-homeowners.html">Homeowners</a>
                 </div>
             </li>

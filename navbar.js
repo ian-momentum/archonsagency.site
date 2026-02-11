@@ -5,7 +5,14 @@ document.addEventListener("DOMContentLoaded", function() {
             <img src="assets/crystal.gif" alt="Archons Logo" class="spinning-logo">
             <span>ARCHONS INSURANCE</span>
         </a>
-        <ul class="nav-links">
+        
+        <button class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle Navigation">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
+
+        <ul class="nav-links" id="navLinks">
             <li><a href="index.html">Home</a></li>
             <li><a href="portal.html">Client Portal</a></li>
             
@@ -45,8 +52,10 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 
-// Mobile Menu Toggle Function
-function toggleMenu() {
+// Expose function to global scope to ensure HTML onclick can find it
+window.toggleMenu = function() {
     const nav = document.getElementById("navLinks");
+    const btn = document.querySelector(".menu-toggle");
     nav.classList.toggle("active");
+    btn.classList.toggle("open");
 }

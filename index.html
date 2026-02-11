@@ -5,8 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Archons Insurance | Powered by Momentum AMP</title>
     <link rel="icon" type="image/gif" href="assets/crystal.gif">
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
     <link rel="stylesheet" href="style.css">
     <script src="navbar.js" defer></script>
 </head>
@@ -69,7 +71,7 @@
 
         <div class="container">
             <div class="section-header">
-                <h2>Why Momentum AMP?</h2>
+                <h2 style="color:white;">Why Momentum AMP?</h2>
                 <p>Don't rebuild your website. Supercharge it with embedded architecture.</p>
             </div>
             
@@ -82,7 +84,7 @@
                 <div class="feature-card tilt-card">
                     <div class="icon">⚡</div>
                     <h3>Standardized Professional UI</h3>
-                    <p>Deploy a consistent, high-end user interface instantly. No custom CSS required—our widgets are optimized for clarity and conversion out of the box.</p>
+                    <p>Deploy a consistent, high-end user interface instantly. Our widgets are pre-styled for professional clarity and conversion out of the box.</p>
                 </div>
                 <div class="feature-card tilt-card">
                     <div class="icon">💎</div>
@@ -127,7 +129,7 @@
             hero.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
         });
 
-        // 3. 3D TILT EFFECT FOR CARDS
+        // 3. 3D TILT EFFECT
         const cards = document.querySelectorAll('.tilt-card');
         cards.forEach(card => {
             card.addEventListener('mousemove', (e) => {
@@ -136,9 +138,8 @@
                 const y = e.clientY - rect.top;
                 const centerX = rect.width / 2;
                 const centerY = rect.height / 2;
-                const rotateX = ((y - centerY) / centerY) * -10; // Max rotation 10deg
+                const rotateX = ((y - centerY) / centerY) * -10;
                 const rotateY = ((x - centerX) / centerX) * 10;
-
                 card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
             });
             card.addEventListener('mouseleave', () => {
@@ -158,11 +159,8 @@
                 counter.innerText = target;
             }
         }
-        // Trigger when scrolled into view
-        const observer = new IntersectionObserver((entries) => {
-            if(entries[0].isIntersecting) updateCounter();
-        });
-        observer.observe(document.querySelector('.promo-section'));
+        // Trigger on load for visibility
+        setTimeout(updateCounter, 500);
     </script>
 </body>
 </html>

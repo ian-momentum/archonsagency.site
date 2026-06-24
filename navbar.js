@@ -2,8 +2,8 @@ document.addEventListener("DOMContentLoaded", function() {
     const navHTML = `
     <nav class="glass-nav">
         <a href="index.html" class="logo">
-            <img src="assets/crystal.gif" alt="Archons Logo" class="spinning-logo">
-            <span>ARCHONS INSURANCE</span>
+            <img src="assets/crystal.gif" alt="Archons Agency Logo" class="spinning-logo">
+            <span>ARCHONS AGENCY</span>
         </a>
         
         <button class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle Navigation">
@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         <ul class="nav-links" id="navLinks">
             <li><a href="index.html">Home</a></li>
-            <li><a href="portal.html">Client Portal</a></li>
+            <li><a href="portal.html">Contact Us</a></li>
             
             <li class="dropdown">
                 <button class="dropbtn">Service Request ▾</button>

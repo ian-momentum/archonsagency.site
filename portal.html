@@ -2,19 +2,772 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Client Portal | Archons</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | Archons Agency</title>
     <link rel="icon" type="image/gif" href="assets/crystal.gif">
     <link rel="stylesheet" href="style.css">
     <script src="navbar.js" defer></script>
+    <style>
+        /* ---- PORTAL / CONTACT PAGE STYLES ---- */
+        .portal-hero {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            padding: 80px 5% 60px;
+            text-align: center;
+            border-bottom: 1px solid rgba(45, 171, 193, 0.2);
+        }
+        .portal-hero .badge {
+            background: rgba(45, 171, 193, 0.1);
+            color: var(--neon-blue);
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 20px;
+            border: 1px solid var(--accent);
+            letter-spacing: 2px;
+        }
+        .portal-hero h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: var(--white);
+            margin-bottom: 16px;
+        }
+        .portal-hero h1 span { color: var(--accent); }
+        .portal-hero p {
+            color: #cbd5e1;
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* ---- FORM WRAPPER ---- */
+        .portal-wrapper {
+            max-width: 780px;
+            margin: 60px auto;
+            padding: 0 20px 80px;
+        }
+
+        .contact-card {
+            background: rgba(30, 41, 59, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(45, 171, 193, 0.25);
+            border-radius: 16px;
+            padding: 50px 50px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 40px rgba(45, 171, 193, 0.05);
+        }
+
+        .contact-card h2 {
+            color: var(--white);
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin: 0 0 8px;
+        }
+        .contact-card .form-subhead {
+            color: #94a3b8;
+            font-size: 0.95rem;
+            margin: 0 0 36px;
+            line-height: 1.6;
+        }
+        .contact-card .form-subhead strong { color: var(--accent); }
+
+        /* ---- FORM FIELDS ---- */
+        .form-group {
+            margin-bottom: 22px;
+            position: relative;
+        }
+        .form-group label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #cbd5e1;
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            transition: color 0.2s;
+        }
+        .form-group label .required { color: var(--accent); }
+
+        /* Status icon in label */
+        .field-status-icon {
+            margin-left: auto;
+            font-size: 0.9rem;
+            opacity: 0;
+            transform: scale(0.5);
+            transition: opacity 0.25s, transform 0.25s;
+        }
+        .form-group.is-valid   .field-status-icon { opacity: 1; transform: scale(1); }
+        .form-group.is-invalid .field-status-icon { opacity: 1; transform: scale(1); }
+
+        /* Input wrapper for icon positioning */
+        .input-wrap { position: relative; }
+        .input-wrap .input-icon {
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1rem;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.25s;
+        }
+        .form-group.is-valid   .input-wrap .input-icon,
+        .form-group.is-invalid .input-wrap .input-icon { opacity: 1; }
+
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group input[type="tel"],
+        .form-group textarea {
+            width: 100%;
+            background: rgba(15, 23, 42, 0.8);
+            border: 1.5px solid rgba(255, 255, 255, 0.12);
+            border-radius: 8px;
+            padding: 14px 44px 14px 16px;
+            color: var(--white);
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            transition: border-color 0.25s, box-shadow 0.25s, background 0.25s;
+            box-sizing: border-box;
+            outline: none;
+        }
+        .form-group textarea { padding-right: 16px; resize: vertical; min-height: 110px; }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder { color: rgba(255,255,255,0.22); }
+
+        /* Focus */
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(45, 171, 193, 0.15);
+            background: rgba(15, 23, 42, 0.95);
+        }
+
+        /* Valid state */
+        .form-group.is-valid input,
+        .form-group.is-valid textarea {
+            border-color: #22c55e;
+            box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1);
+        }
+
+        /* Invalid state */
+        .form-group.is-invalid input,
+        .form-group.is-invalid textarea {
+            border-color: #f87171;
+            box-shadow: 0 0 0 3px rgba(248, 113, 113, 0.12);
+            animation: shake 0.35s ease;
+        }
+
+        @keyframes shake {
+            0%,100% { transform: translateX(0); }
+            20%      { transform: translateX(-6px); }
+            40%      { transform: translateX(6px); }
+            60%      { transform: translateX(-4px); }
+            80%      { transform: translateX(4px); }
+        }
+
+        /* Inline error message */
+        .field-error {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.8rem;
+            color: #f87171;
+            margin-top: 7px;
+            padding: 0 4px;
+            min-height: 0;
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            transition: max-height 0.3s ease, opacity 0.25s ease, margin-top 0.3s ease;
+        }
+        .form-group.is-invalid .field-error {
+            max-height: 40px;
+            opacity: 1;
+            margin-top: 7px;
+        }
+        .field-error::before { content: "⚠"; font-size: 0.75rem; }
+
+        /* Valid hint (disappears after valid) */
+        .field-hint {
+            font-size: 0.78rem;
+            color: #22c55e;
+            margin-top: 6px;
+            padding: 0 4px;
+            min-height: 0;
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            transition: max-height 0.3s ease, opacity 0.25s ease;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .form-group.is-valid .field-hint {
+            max-height: 30px;
+            opacity: 1;
+        }
+        .field-hint::before { content: "✓"; font-weight: 700; }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+
+        /* ---- DIVIDER ---- */
+        .form-divider {
+            border: none;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            margin: 32px 0;
+        }
+
+        /* ---- SMS CONSENT BLOCK ---- */
+        .consent-block {
+            background: rgba(45, 171, 193, 0.05);
+            border: 1px solid rgba(45, 171, 193, 0.2);
+            border-radius: 10px;
+            padding: 22px 24px;
+            margin-bottom: 28px;
+        }
+        .consent-block .consent-title {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .consent-block .consent-title::before { content: "🔒"; font-size: 0.9rem; }
+        .consent-checkbox-row { display: flex; align-items: flex-start; gap: 14px; }
+        .consent-checkbox-row input[type="checkbox"] {
+            width: 20px; height: 20px; min-width: 20px;
+            margin-top: 2px; accent-color: var(--accent); cursor: pointer; border-radius: 4px;
+        }
+        .consent-text { font-size: 0.88rem; color: #94a3b8; line-height: 1.65; }
+        .consent-text strong { color: #cbd5e1; }
+
+        /* ---- SUBMIT BUTTON ---- */
+        .btn-submit {
+            width: 100%;
+            background: var(--accent);
+            color: #0f172a;
+            padding: 17px 32px;
+            border: 1px solid var(--accent);
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 0 20px rgba(45, 171, 193, 0.4);
+            font-family: 'Inter', sans-serif;
+            margin-top: 6px;
+        }
+        .btn-submit:hover {
+            background: transparent;
+            color: var(--accent);
+            box-shadow: 0 0 40px rgba(45, 171, 193, 0.6);
+            text-shadow: 0 0 10px var(--accent);
+        }
+
+        /* ---- SUCCESS MODAL OVERLAY ---- */
+        .success-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(10, 15, 30, 0.82);
+            backdrop-filter: blur(6px);
+            z-index: 9000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .success-overlay.active { display: flex; }
+
+        .success-modal {
+            background: linear-gradient(145deg, #1e293b, #0f1f35);
+            border: 1px solid rgba(45, 171, 193, 0.35);
+            border-radius: 20px;
+            padding: 56px 50px 48px;
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.6), 0 0 60px rgba(45,171,193,0.08);
+            position: relative;
+            animation: modalIn 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+        }
+
+        @keyframes modalIn {
+            from { opacity: 0; transform: scale(0.85) translateY(20px); }
+            to   { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        /* Animated checkmark ring */
+        .check-ring {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(45,171,193,0.15) 0%, transparent 70%);
+            border: 2px solid rgba(45,171,193,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 28px;
+            position: relative;
+            animation: ringPulse 2.5s ease-in-out infinite;
+        }
+        @keyframes ringPulse {
+            0%,100% { box-shadow: 0 0 0 0 rgba(45,171,193,0.3); }
+            50%      { box-shadow: 0 0 0 14px rgba(45,171,193,0); }
+        }
+        .check-ring svg {
+            width: 42px;
+            height: 42px;
+        }
+        .check-ring .check-path {
+            stroke: #2dabc1;
+            stroke-width: 3;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            fill: none;
+            stroke-dasharray: 60;
+            stroke-dashoffset: 60;
+            animation: drawCheck 0.55s 0.3s ease forwards;
+        }
+        @keyframes drawCheck {
+            to { stroke-dashoffset: 0; }
+        }
+
+        .success-modal h3 {
+            color: #ffffff;
+            font-size: 1.75rem;
+            font-weight: 800;
+            margin: 0 0 12px;
+            letter-spacing: -0.3px;
+        }
+        .success-modal .success-sub {
+            color: #64748b;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin: 0 0 32px;
+        }
+
+        /* What happens next steps */
+        .next-steps {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 12px;
+            padding: 20px 24px;
+            text-align: left;
+            margin-bottom: 32px;
+        }
+        .next-steps .ns-title {
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 14px;
+        }
+        .next-step-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+        }
+        .next-step-item:last-child { border-bottom: none; }
+        .ns-num {
+            background: rgba(45, 171, 193, 0.12);
+            border: 1px solid rgba(45, 171, 193, 0.25);
+            color: var(--accent);
+            font-size: 0.72rem;
+            font-weight: 800;
+            width: 22px;
+            height: 22px;
+            min-width: 22px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 1px;
+        }
+        .ns-text {
+            font-size: 0.88rem;
+            color: #94a3b8;
+            line-height: 1.5;
+        }
+        .ns-text strong { color: #cbd5e1; }
+
+        .btn-close-modal {
+            width: 100%;
+            background: transparent;
+            color: var(--accent);
+            border: 1.5px solid rgba(45, 171, 193, 0.4);
+            border-radius: 8px;
+            padding: 14px 24px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.25s;
+        }
+        .btn-close-modal:hover {
+            background: rgba(45, 171, 193, 0.08);
+            border-color: var(--accent);
+            box-shadow: 0 0 20px rgba(45,171,193,0.15);
+        }
+
+        /* Decorative corner accents on modal */
+        .success-modal::before,
+        .success-modal::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            border-color: rgba(45, 171, 193, 0.2);
+            border-style: solid;
+        }
+        .success-modal::before {
+            top: 16px; left: 16px;
+            border-width: 2px 0 0 2px;
+            border-radius: 4px 0 0 0;
+        }
+        .success-modal::after {
+            bottom: 16px; right: 16px;
+            border-width: 0 2px 2px 0;
+            border-radius: 0 0 4px 0;
+        }
+
+        /* ---- TRUST BADGES ---- */
+        .trust-row {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 36px;
+            flex-wrap: wrap;
+        }
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #64748b;
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+        .trust-item .ti-icon { color: var(--accent); font-size: 1rem; }
+
+        /* ---- FOOTER ---- */
+        .site-footer {
+            background: #0b1120;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            padding: 40px 5%;
+            text-align: center;
+        }
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+        }
+        .footer-links a {
+            color: #64748b;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        .footer-links a:hover { color: var(--accent); }
+        .footer-copy { color: #334155; font-size: 0.78rem; }
+        .footer-copy strong { color: #475569; }
+
+        /* ---- MOBILE ---- */
+        @media (max-width: 640px) {
+            .contact-card { padding: 30px 24px; }
+            .form-row { grid-template-columns: 1fr; }
+            .portal-hero h1 { font-size: 2rem; }
+            .trust-row { gap: 16px; }
+            .success-modal { padding: 40px 28px 36px; }
+        }
+    </style>
 </head>
 <body>
     <div id="navbar-container"></div>
 
-    <main class="container">
-        <div class="glass-card">
-            <h2>Insured Login</h2>
-            <script id="nowcerts" src="https://www.nowcerts.com/Resources/Scripts/import.js" data-destination="Login" type="text/javascript"></script>
+    <!-- SUCCESS MODAL OVERLAY -->
+    <div class="success-overlay" id="successOverlay" role="dialog" aria-modal="true" aria-labelledby="successTitle">
+        <div class="success-modal">
+            <div class="check-ring">
+                <svg viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg">
+                    <polyline class="check-path" points="12,26 22,36 40,18"/>
+                </svg>
+            </div>
+            <h3 id="successTitle">Message Sent!</h3>
+            <p class="success-sub">Thank you for contacting Archons Agency. Your message is in good hands — here's what happens next.</p>
+            <div class="next-steps">
+                <div class="ns-title">What to expect</div>
+                <div class="next-step-item">
+                    <div class="ns-num">1</div>
+                    <div class="ns-text"><strong>Confirmation email</strong> — Check your inbox within the next few minutes for a receipt of your message.</div>
+                </div>
+                <div class="next-step-item">
+                    <div class="ns-num">2</div>
+                    <div class="ns-text"><strong>Agent review</strong> — A licensed Archons representative will review your request within 1 business day.</div>
+                </div>
+                <div class="next-step-item">
+                    <div class="ns-num">3</div>
+                    <div class="ns-text"><strong>Personal follow-up</strong> — We'll reach out via your preferred contact method with answers and next steps.</div>
+                </div>
+            </div>
+            <button class="btn-close-modal" onclick="closeSuccess()">Back to Home</button>
         </div>
-    </main>
+    </div>
+
+    <!-- HERO BANNER -->
+    <section class="portal-hero">
+        <div class="badge">GET IN TOUCH</div>
+        <h1>Let's Talk About <span>Your Growth</span></h1>
+        <p>Whether you need a quote, have a policy question, or want to learn how Archons Agency can serve you — we respond within one business day.</p>
+    </section>
+
+    <!-- FORM SECTION -->
+    <div class="portal-wrapper">
+        <div class="contact-card">
+            <h2>Send Us a Message</h2>
+            <p class="form-subhead">Fields marked <strong>*</strong> are required. Your information is kept strictly confidential.</p>
+
+            <div class="form-row">
+                <!-- FULL NAME -->
+                <div class="form-group" id="group-fullName">
+                    <label for="fullName">
+                        Full Name <span class="required">*</span>
+                        <span class="field-status-icon" id="icon-fullName"></span>
+                    </label>
+                    <div class="input-wrap">
+                        <input type="text" id="fullName" name="fullName" placeholder="Jane Smith" autocomplete="name">
+                        <span class="input-icon" id="inputIcon-fullName"></span>
+                    </div>
+                    <div class="field-error" id="err-fullName">Please enter your full name.</div>
+                    <div class="field-hint" id="hint-fullName">Looks good!</div>
+                </div>
+
+                <!-- PHONE -->
+                <div class="form-group" id="group-phone">
+                    <label for="phone">
+                        Phone Number <span class="required">*</span>
+                        <span class="field-status-icon" id="icon-phone"></span>
+                    </label>
+                    <div class="input-wrap">
+                        <input type="tel" id="phone" name="phone" placeholder="(555) 000-0000" autocomplete="tel">
+                        <span class="input-icon" id="inputIcon-phone"></span>
+                    </div>
+                    <div class="field-error" id="err-phone">Please enter a valid 10-digit phone number.</div>
+                    <div class="field-hint" id="hint-phone">Looks good!</div>
+                </div>
+            </div>
+
+            <!-- EMAIL -->
+            <div class="form-group" id="group-email">
+                <label for="email">
+                    Email Address <span class="required">*</span>
+                    <span class="field-status-icon" id="icon-email"></span>
+                </label>
+                <div class="input-wrap">
+                    <input type="email" id="email" name="email" placeholder="jane@example.com" autocomplete="email">
+                    <span class="input-icon" id="inputIcon-email"></span>
+                </div>
+                <div class="field-error" id="err-email">Please enter a valid email address (e.g. jane@example.com).</div>
+                <div class="field-hint" id="hint-email">Looks good!</div>
+            </div>
+
+            <!-- MESSAGE -->
+            <div class="form-group" id="group-message">
+                <label for="message">
+                    How can we help you? <span class="required">*</span>
+                    <span class="field-status-icon" id="icon-message"></span>
+                </label>
+                <textarea id="message" name="message" placeholder="Tell us about your insurance needs, a current policy question, or anything else we can assist with..."></textarea>
+                <div class="field-error" id="err-message">Please describe how we can help you.</div>
+                <div class="field-hint" id="hint-message">Got it!</div>
+            </div>
+
+            <hr class="form-divider">
+
+            <!-- SMS CONSENT — Twilio A2P 10DLC Compliant -->
+            <div class="consent-block">
+                <div class="consent-title">SMS Communication Consent</div>
+                <div class="consent-checkbox-row">
+                    <input
+                        type="checkbox"
+                        id="smsConsent"
+                        name="smsConsent"
+                        value="yes"
+                    >
+                    <!-- ⚠️ INTENTIONALLY UNCHECKED BY DEFAULT — Twilio A2P 10DLC requirement -->
+                    <label for="smsConsent" class="consent-text">
+                        I agree to receive SMS messages from <strong>Archons Agency</strong>. By checking this box, you consent to receive automated and conversational text messages regarding your account, support updates, and service notifications. Message and data rates may apply. Message frequency varies. You can reply <strong>HELP</strong> for assistance or <strong>STOP</strong> to opt out at any time.
+                    </label>
+                </div>
+            </div>
+
+            <button type="button" class="btn-submit" onclick="handleSubmit()">
+                Send My Message →
+            </button>
+        </div>
+
+        <!-- TRUST BADGES -->
+        <div class="trust-row">
+            <div class="trust-item"><span class="ti-icon">🔒</span> Secure & Encrypted</div>
+            <div class="trust-item"><span class="ti-icon">🛡️</span> Licensed Agency</div>
+            <div class="trust-item"><span class="ti-icon">⚡</span> 1-Business-Day Response</div>
+            <div class="trust-item"><span class="ti-icon">🚫</span> No Spam — Ever</div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+        <div class="footer-links">
+            <a href="privacy-policy.html">Privacy Policy</a>
+            <a href="terms.html">Terms &amp; Conditions</a>
+            <a href="index.html">Home</a>
+            <a href="portal.html">Contact</a>
+        </div>
+        <p class="footer-copy">
+            &copy; 2025 <strong>Archons Agency</strong>. All rights reserved.<br>
+            Archons Agency utilizes the <strong>Momentum AMP</strong> platform to deliver seamless client services. Momentum AMP is a third-party software provider and is not affiliated with Archons Agency.
+        </p>
+    </footer>
+
+    <script>
+    // ─── VALIDATION RULES ──────────────────────────────────────────────────────
+    const rules = {
+        fullName: {
+            validate: v => v.trim().length >= 2 && v.trim().includes(' '),
+            errorMsg: 'Please enter your first and last name.'
+        },
+        phone: {
+            validate: v => /^[\d\s\-\(\)\+]{10,}$/.test(v.replace(/\D/g,'')) && v.replace(/\D/g,'').length >= 10,
+            errorMsg: 'Please enter a valid 10-digit phone number.'
+        },
+        email: {
+            validate: v => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()),
+            errorMsg: 'Please enter a valid email address (e.g. jane@example.com).'
+        },
+        message: {
+            validate: v => v.trim().length >= 10,
+            errorMsg: 'Please provide a bit more detail (at least 10 characters).'
+        }
+    };
+
+    // ─── SET FIELD STATE ───────────────────────────────────────────────────────
+    function setFieldState(id, state) {
+        // state: 'idle' | 'valid' | 'invalid'
+        const group      = document.getElementById('group-' + id);
+        const statusIcon = document.getElementById('icon-' + id);
+        const inputIcon  = document.getElementById('inputIcon-' + id);
+        const errEl      = document.getElementById('err-' + id);
+
+        group.classList.remove('is-valid', 'is-invalid');
+
+        if (state === 'valid') {
+            group.classList.add('is-valid');
+            statusIcon.textContent = '✓';
+            statusIcon.style.color = '#22c55e';
+            inputIcon.textContent  = '✓';
+            inputIcon.style.color  = '#22c55e';
+        } else if (state === 'invalid') {
+            group.classList.add('is-invalid');
+            statusIcon.textContent = '✕';
+            statusIcon.style.color = '#f87171';
+            inputIcon.textContent  = '✕';
+            inputIcon.style.color  = '#f87171';
+            // Update error message dynamically
+            if (rules[id]) errEl.textContent = '⚠ ' + rules[id].errorMsg;
+        } else {
+            statusIcon.textContent = '';
+            inputIcon.textContent  = '';
+        }
+    }
+
+    // ─── LIVE VALIDATION (on blur, re-check on input after first touch) ────────
+    Object.keys(rules).forEach(id => {
+        const el = document.getElementById(id);
+        if (!el) return;
+
+        let touched = false;
+
+        el.addEventListener('blur', () => {
+            touched = true;
+            const ok = rules[id].validate(el.value);
+            setFieldState(id, el.value.trim() === '' ? 'invalid' : ok ? 'valid' : 'invalid');
+        });
+
+        el.addEventListener('input', () => {
+            if (!touched) return;
+            const ok = rules[id].validate(el.value);
+            if (el.value.trim() === '') {
+                setFieldState(id, 'idle');
+            } else {
+                setFieldState(id, ok ? 'valid' : 'invalid');
+            }
+        });
+    });
+
+    // ─── SUBMIT ────────────────────────────────────────────────────────────────
+    function handleSubmit() {
+        let allValid = true;
+
+        Object.keys(rules).forEach(id => {
+            const el = document.getElementById(id);
+            const ok = rules[id].validate(el.value);
+            setFieldState(id, ok ? 'valid' : 'invalid');
+            if (!ok) allValid = false;
+        });
+
+        if (!allValid) {
+            // Scroll to first error
+            const firstInvalid = document.querySelector('.form-group.is-invalid input, .form-group.is-invalid textarea');
+            if (firstInvalid) {
+                firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                firstInvalid.focus();
+            }
+            return;
+        }
+
+        // Show success modal
+        document.getElementById('successOverlay').classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    // ─── CLOSE MODAL ──────────────────────────────────────────────────────────
+    function closeSuccess() {
+        window.location.href = 'index.html';
+    }
+
+    // Close on backdrop click
+    document.getElementById('successOverlay').addEventListener('click', function(e) {
+        if (e.target === this) closeSuccess();
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Escape' && document.getElementById('successOverlay').classList.contains('active')) {
+            closeSuccess();
+        }
+    });
+    </script>
 </body>
 </html>

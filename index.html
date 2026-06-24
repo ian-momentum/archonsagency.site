@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Archons Insurance | Powered by Momentum AMP</title>
+    <title>Archons Agency | Smarter Insurance, Faster Service</title>
     <link rel="icon" type="image/gif" href="assets/crystal.gif">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11,24 +11,73 @@
     
     <link rel="stylesheet" href="style.css">
     <script src="navbar.js" defer></script>
+    <style>
+        /* ---- INDEX-SPECIFIC ADDITIONS ---- */
+        .site-footer {
+            background: #0b1120;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            padding: 40px 5%;
+            text-align: center;
+        }
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+        }
+        .footer-links a {
+            color: #64748b;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        .footer-links a:hover { color: var(--accent); }
+        .footer-copy { color: #334155; font-size: 0.78rem; }
+        .footer-copy strong { color: #475569; }
+
+        .section-header p { color: #94a3b8; font-size: 1.05rem; max-width: 580px; margin: 14px auto 0; line-height: 1.7; }
+
+        /* Value prop bar below hero */
+        .value-bar {
+            background: rgba(45, 171, 193, 0.06);
+            border-top: 1px solid rgba(45, 171, 193, 0.15);
+            border-bottom: 1px solid rgba(45, 171, 193, 0.15);
+            padding: 22px 5%;
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+        .value-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #cbd5e1;
+            font-size: 0.88rem;
+            font-weight: 500;
+        }
+        .value-item .vi-icon { color: var(--accent); font-size: 1.1rem; }
+    </style>
 </head>
 <body>
     <div id="navbar-container"></div>
 
+    <!-- HERO -->
     <header class="hero-section" id="hero">
         <div class="interactive-glow"></div>
 
         <div class="hero-content">
-            <div class="badge">MOMENTUM AMP DEMO</div>
+            <div class="badge">ARCHONS AGENCY</div>
             <h1 class="typing-container">
-                The Future of <span class="typing-text"></span><span class="cursor">|</span>
+                Insurance Built for <span class="typing-text"></span><span class="cursor">|</span>
             </h1>
             <p class="hero-sub">
-                Welcome to <strong>Archons Insurance</strong>, a live demonstration of the <strong>Momentum Agency Management Portal (AMP)</strong>. 
-                This site showcases how agencies can embed standardized, professional widgets to bridge legacy systems with modern client expectations.
+                <strong>Archons Agency</strong> is an independent insurance agency delivering fast, transparent, and technology-driven coverage solutions. We leverage the <strong>Momentum AMP</strong> platform to give our clients a seamless digital experience — from instant quotes to real-time service requests.
             </p>
             <div class="hero-buttons">
-                <a href="portal.html" class="btn-primary">Test Client Portal</a>
+                <a href="portal.html" class="btn-primary">Get in Touch</a>
             </div>
         </div>
         <div class="hero-visual">
@@ -41,75 +90,101 @@
         </div>
     </header>
 
+    <!-- VALUE BAR -->
+    <div class="value-bar">
+        <div class="value-item"><span class="vi-icon">⚡</span> Same-Day Service Requests</div>
+        <div class="value-item"><span class="vi-icon">🛡️</span> Licensed &amp; Independent</div>
+        <div class="value-item"><span class="vi-icon">📲</span> Digital-First Client Experience</div>
+        <div class="value-item"><span class="vi-icon">🔒</span> AES-256 Secure Data</div>
+    </div>
+
+    <!-- TICKER -->
     <div class="news-ticker">
         <div class="ticker-track">
             <div class="ticker-content">
-                <span>🚀 <strong>SYSTEM:</strong> Momentum AMP Node active.</span>
+                <span>🚀 <strong>LIVE:</strong> Archons Agency is actively serving clients.</span>
                 <span> • </span>
-                <span>🛡️ <strong>SECURE:</strong> AES-256 Encryption verified.</span>
+                <span>🛡️ <strong>SECURE:</strong> AES-256 encryption on all client data.</span>
                 <span> • </span>
-                <span>🔗 <strong>CONNECT:</strong> AMS Bi-Directional Sync enabled.</span>
+                <span>🔗 <strong>CONNECTED:</strong> Real-time AMS sync via Momentum AMP.</span>
                 <span> • </span>
-                <span>⚡ <strong>SPEED:</strong> Widget load time &lt; 200ms.</span>
+                <span>⚡ <strong>FAST:</strong> Service requests processed within one business day.</span>
                 <span> • </span>
             </div>
             <div class="ticker-content">
-                <span>🚀 <strong>SYSTEM:</strong> Momentum AMP Node active.</span>
+                <span>🚀 <strong>LIVE:</strong> Archons Agency is actively serving clients.</span>
                 <span> • </span>
-                <span>🛡️ <strong>SECURE:</strong> AES-256 Encryption verified.</span>
+                <span>🛡️ <strong>SECURE:</strong> AES-256 encryption on all client data.</span>
                 <span> • </span>
-                <span>🔗 <strong>CONNECT:</strong> AMS Bi-Directional Sync enabled.</span>
+                <span>🔗 <strong>CONNECTED:</strong> Real-time AMS sync via Momentum AMP.</span>
                 <span> • </span>
-                <span>⚡ <strong>SPEED:</strong> Widget load time &lt; 200ms.</span>
+                <span>⚡ <strong>FAST:</strong> Service requests processed within one business day.</span>
                 <span> • </span>
             </div>
         </div>
     </div>
 
+    <!-- MAIN CONTENT -->
     <main class="main-wrapper">
         <div class="circuit-bg"></div>
 
         <div class="container">
+            <!-- WHY ARCHONS SECTION -->
             <div class="section-header">
-                <h2 style="color:white;">Why Momentum AMP?</h2>
-                <p>Don't rebuild your website. Supercharge it with embedded architecture.</p>
+                <h2 style="color:white;">Why Clients Choose Archons Agency</h2>
+                <p>We combine the expertise of a boutique insurance agency with enterprise-grade technology — so you get personalized service without the paperwork headaches.</p>
             </div>
             
             <div class="card-grid">
                 <div class="feature-card tilt-card">
-                    <div class="icon">🔌</div>
-                    <h3>Plug & Play Integration</h3>
-                    <p>Pre-built HTML modules for Quotes, Service Requests, and Portals that drop seamlessly into any agency website environment.</p>
+                    <div class="icon">🤝</div>
+                    <h3>Independent &amp; Unbiased</h3>
+                    <p>As a fully independent agency, we work for you — not the carriers. We compare options across the market to find the right coverage at the right price for your specific situation.</p>
                 </div>
                 <div class="feature-card tilt-card">
                     <div class="icon">⚡</div>
-                    <h3>Standardized Professional UI</h3>
-                    <p>Deploy a consistent, high-end user interface instantly. Our widgets are pre-styled for professional clarity and conversion out of the box.</p>
+                    <h3>Digital Service Platform</h3>
+                    <p>Powered by the <strong style="color:var(--accent)">Momentum AMP</strong> platform, our client portal lets you submit service requests, request COIs, update your policy, and get quotes — 24/7, from any device.</p>
                 </div>
                 <div class="feature-card tilt-card">
                     <div class="icon">💎</div>
-                    <h3>The Crystal Connection</h3>
-                    <p>Archons represents the "Crystal Clear" visibility Momentum AMP provides into your agency's data pipeline.</p>
+                    <h3>Transparent Communication</h3>
+                    <p>No surprises. We keep you informed at every step — whether your policy is renewing, a claim is in progress, or your coverage needs a review. Crystal-clear updates, always.</p>
                 </div>
             </div>
 
+            <!-- PLATFORM EXPLANATION SECTION -->
             <section class="promo-section">
                 <div class="promo-content">
-                    <h3>Ready for the Upgrade?</h3>
-                    <p>Momentum AMP turns static brochure websites into dynamic service platforms. Join the network of connected agencies today.</p>
+                    <h3>Powered by Momentum AMP</h3>
+                    <p>Archons Agency integrates the <strong>Momentum AMP</strong> agency management software to streamline how we serve you. Momentum AMP is a leading SaaS platform for insurance agencies — we use it as our operational backbone so we can focus on what matters: getting you the best coverage and responding to your needs faster than the competition.</p>
                 </div>
                 <div class="promo-stat">
                     <span class="counter" data-target="100">85</span>%
-                    <label>System Efficiency</label>
+                    <label>Client Satisfaction</label>
                 </div>
             </section>
         </div>
     </main>
 
+    <!-- FOOTER — visible on every page -->
+    <footer class="site-footer">
+        <div class="footer-links">
+            <a href="privacy-policy.html">Privacy Policy</a>
+            <a href="terms.html">Terms &amp; Conditions</a>
+            <a href="portal.html">Contact Us</a>
+            <a href="index.html">Home</a>
+        </div>
+        <p class="footer-copy">
+            &copy; 2025 <strong>Archons Agency</strong>. All rights reserved.<br>
+            Archons Agency is an independent licensed insurance agency. Momentum AMP is a third-party software platform used by Archons Agency and is not affiliated with or the same entity as Archons Agency.
+        </p>
+    </footer>
+
     <script>
-        // 1. TYPING EFFECT
+        // 1. TYPING EFFECT — updated phrases reflecting real agency identity
         const textElement = document.querySelector('.typing-text');
-        const phrases = ["Agency Management.", "Seamless Data.", "Embedded Insurance.", "Momentum AMP."];
+        const phrases = ["The Modern Client.", "Your Life's Biggest Assets.", "Speed and Clarity.", "Your Peace of Mind."];
         let phraseIndex = 0, charIndex = 0, isDeleting = false;
 
         function type() {
@@ -159,7 +234,6 @@
                 counter.innerText = target;
             }
         }
-        // Trigger on load for visibility
         setTimeout(updateCounter, 500);
     </script>
 </body>

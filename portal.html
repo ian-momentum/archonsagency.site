@@ -91,31 +91,36 @@
         }
         .form-group label .required { color: var(--accent); }
 
-        /* Status icon in label */
-        .field-status-icon {
-            margin-left: auto;
-            font-size: 0.9rem;
-            opacity: 0;
-            transform: scale(0.5);
-            transition: opacity 0.25s, transform 0.25s;
-        }
-        .form-group.is-valid   .field-status-icon { opacity: 1; transform: scale(1); }
-        .form-group.is-invalid .field-status-icon { opacity: 1; transform: scale(1); }
-
-        /* Input wrapper for icon positioning */
+        /* Input wrapper for icon positioning (single status icon lives here) */
         .input-wrap { position: relative; }
         .input-wrap .input-icon {
             position: absolute;
             right: 14px;
             top: 50%;
-            transform: translateY(-50%);
-            font-size: 1rem;
+            font-size: 1.05rem;
+            font-weight: 700;
             pointer-events: none;
             opacity: 0;
-            transition: opacity 0.25s;
+            transform: translateY(-50%) scale(0.5);
+            transition: opacity 0.25s, transform 0.25s;
         }
         .form-group.is-valid   .input-wrap .input-icon,
-        .form-group.is-invalid .input-wrap .input-icon { opacity: 1; }
+        .form-group.is-invalid .input-wrap .input-icon { opacity: 1; transform: translateY(-50%) scale(1); }
+
+        /* Message textarea's icon sits top-right since the field grows vertically */
+        .input-icon-textarea {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            font-size: 1.05rem;
+            font-weight: 700;
+            pointer-events: none;
+            opacity: 0;
+            transform: scale(0.5);
+            transition: opacity 0.25s, transform 0.25s;
+        }
+        .form-group.is-valid   .input-icon-textarea,
+        .form-group.is-invalid .input-icon-textarea { opacity: 1; transform: scale(1); }
 
         .form-group input[type="text"],
         .form-group input[type="email"],
@@ -133,7 +138,7 @@
             box-sizing: border-box;
             outline: none;
         }
-        .form-group textarea { padding-right: 16px; resize: vertical; min-height: 110px; }
+        .form-group textarea { padding-right: 40px; resize: vertical; min-height: 110px; }
 
         .form-group input::placeholder,
         .form-group textarea::placeholder { color: rgba(255,255,255,0.22); }
@@ -252,6 +257,8 @@
         }
         .consent-text { font-size: 0.88rem; color: #94a3b8; line-height: 1.65; }
         .consent-text strong { color: #cbd5e1; }
+        .consent-text a { color: var(--accent); text-decoration: underline; }
+        .consent-text a:hover { color: var(--white); }
 
         /* ---- SUBMIT BUTTON ---- */
         .btn-submit {
@@ -554,7 +561,6 @@
                 <div class="form-group" id="group-fullName">
                     <label for="fullName">
                         Full Name <span class="required">*</span>
-                        <span class="field-status-icon" id="icon-fullName"></span>
                     </label>
                     <div class="input-wrap">
                         <input type="text" id="fullName" name="fullName" placeholder="Jane Smith" autocomplete="name">
@@ -568,7 +574,6 @@
                 <div class="form-group" id="group-phone">
                     <label for="phone">
                         Phone Number <span class="required">*</span>
-                        <span class="field-status-icon" id="icon-phone"></span>
                     </label>
                     <div class="input-wrap">
                         <input type="tel" id="phone" name="phone" placeholder="(555) 000-0000" autocomplete="tel">
@@ -583,7 +588,6 @@
             <div class="form-group" id="group-email">
                 <label for="email">
                     Email Address <span class="required">*</span>
-                    <span class="field-status-icon" id="icon-email"></span>
                 </label>
                 <div class="input-wrap">
                     <input type="email" id="email" name="email" placeholder="jane@example.com" autocomplete="email">
@@ -597,9 +601,9 @@
             <div class="form-group" id="group-message">
                 <label for="message">
                     How can we help you? <span class="required">*</span>
-                    <span class="field-status-icon" id="icon-message"></span>
                 </label>
                 <textarea id="message" name="message" placeholder="Tell us about your insurance needs, a current policy question, or anything else we can assist with..."></textarea>
+                <span class="input-icon input-icon-textarea" id="inputIcon-message"></span>
                 <div class="field-error" id="err-message">Please describe how we can help you.</div>
                 <div class="field-hint" id="hint-message">Got it!</div>
             </div>
@@ -618,7 +622,7 @@
                     >
                     <!-- ⚠️ INTENTIONALLY UNCHECKED BY DEFAULT — Twilio A2P 10DLC requirement -->
                     <label for="smsConsent" class="consent-text">
-                        I agree to receive SMS messages from <strong>Archons Agency</strong>. By checking this box, you consent to receive automated and conversational text messages regarding your account, support updates, and service notifications. Message and data rates may apply. Message frequency varies. You can reply <strong>HELP</strong> for assistance or <strong>STOP</strong> to opt out at any time.
+                        I agree to receive SMS messages from <strong>Archons Agency</strong>. By checking this box, you consent to receive automated and conversational text messages regarding your account, support updates, and service notifications. Message and data rates may apply. Message frequency varies. You can reply <strong>HELP</strong> for assistance or <strong>STOP</strong> to opt out at any time. See our <a href="privacy-policy.html" target="_blank" rel="noopener">Privacy Policy</a> and <a href="terms.html" target="_blank" rel="noopener">Terms &amp; Conditions</a>.
                     </label>
                 </div>
             </div>
@@ -667,38 +671,32 @@
             errorMsg: 'Please enter a valid email address (e.g. jane@example.com).'
         },
         message: {
-            validate: v => v.trim().length >= 10,
-            errorMsg: 'Please provide a bit more detail (at least 10 characters).'
+            validate: v => v.trim().length > 0,
+            errorMsg: 'Please describe how we can help you.'
         }
     };
 
     // ─── SET FIELD STATE ───────────────────────────────────────────────────────
     function setFieldState(id, state) {
         // state: 'idle' | 'valid' | 'invalid'
-        const group      = document.getElementById('group-' + id);
-        const statusIcon = document.getElementById('icon-' + id);
-        const inputIcon  = document.getElementById('inputIcon-' + id);
-        const errEl      = document.getElementById('err-' + id);
+        const group     = document.getElementById('group-' + id);
+        const inputIcon = document.getElementById('inputIcon-' + id);
+        const errEl     = document.getElementById('err-' + id);
 
         group.classList.remove('is-valid', 'is-invalid');
 
         if (state === 'valid') {
             group.classList.add('is-valid');
-            statusIcon.textContent = '✓';
-            statusIcon.style.color = '#22c55e';
-            inputIcon.textContent  = '✓';
-            inputIcon.style.color  = '#22c55e';
+            inputIcon.textContent = '✓';
+            inputIcon.style.color = '#22c55e';
         } else if (state === 'invalid') {
             group.classList.add('is-invalid');
-            statusIcon.textContent = '✕';
-            statusIcon.style.color = '#f87171';
-            inputIcon.textContent  = '✕';
-            inputIcon.style.color  = '#f87171';
+            inputIcon.textContent = '✕';
+            inputIcon.style.color = '#f87171';
             // Update error message dynamically
-            if (rules[id]) errEl.textContent = '⚠ ' + rules[id].errorMsg;
+            if (rules[id]) errEl.textContent = rules[id].errorMsg;
         } else {
-            statusIcon.textContent = '';
-            inputIcon.textContent  = '';
+            inputIcon.textContent = '';
         }
     }
 
